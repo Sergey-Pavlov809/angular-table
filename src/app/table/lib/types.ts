@@ -3,6 +3,7 @@ export type TColumn = {
     title: string;
     size?: number;
     type?: string;
+    formatter?: unknown;
 }
 
 export type TRow = {

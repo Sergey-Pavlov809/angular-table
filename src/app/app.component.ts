@@ -73,6 +73,7 @@ const COLUMNS: TColumn[]  = [
     key: 'is_active',
     title: 'is_active',
     type: 'boolean',
+    formatter: null
   },
   {
     key: 'metadata',
