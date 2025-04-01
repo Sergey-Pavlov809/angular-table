@@ -3,7 +3,7 @@
     <div>
         <span>Show only checked</span><input type="checkbox" [value]="filters.value.showOnlySelected" (click)="onShowOnlySelectedClick()">
     </div>
-    <button (click)="onHideFilters()">hide filters</button>
+    <button (click)="onHideFilters()">@if(isShowFilters){hide filters}@else {show filters}</button>
     
     <table>
         <thead>
@@ -23,7 +23,7 @@
                     </th>
                 }          
             </tr>
-            @if(filters){
+            @if(filters && isShowFilters){
                 <tr [formGroup]="filters">
                     <th>
                        

@@ -42,7 +42,6 @@ export class TableComponent {
   }
 
   ngOnInit() {
-    debugger
     this.initForm()
     this.formattedRows = getFormattedRows(this.rows)
     this.copyRows = getFormattedRows(this.rows)

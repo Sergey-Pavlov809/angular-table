@@ -14,12 +14,12 @@ const ROWS: TRow[] = [
     { key: "id", value: 2 },
     { key: "name", value: "123" },
     { key: "date", value: new Date() },
-    { key: "is_active", value: true },
+    { key: "is_active", value: false },
     { key: "metadata", value: 'asdqweq' },
     { key: "stock", value: 'stock' }
   ],
   [
-    { key: "id", value: 145 },
+    { key: "id", value: 1445 },
     { key: "name", value: "Laptop" },
     { key: "date", value: new Date() },
     { key: "is_active", value: true },
@@ -47,8 +47,8 @@ const ROWS: TRow[] = [
     { key: "id", value: 175 },
     { key: "name", value: "Laptop" },
     { key: "date", value: new Date() },
-    { key: "is_active", value: true },
-    { key: "metadata", value: 'asd' },
+    { key: "is_active", value: false },
+    { key: "metadata", value: 'asda' },
     { key: "stock", value: null }
   ],
 ];
