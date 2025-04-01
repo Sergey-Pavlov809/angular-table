@@ -1,1 +1,60 @@
-<p>table works!</p>
+<div class="container">
+    <button (click)="onResetFilters()">clear filters</button>
+    <div>
+        <span>Show only checked</span><input type="checkbox" [value]="filters.value.showOnlySelected" (click)="onShowOnlySelectedClick()">
+    </div>
+    <button (click)="onHideFilters()">hide filters</button>
+    
+    <table>
+        <thead>
+            <tr class="table-header" (click)="onSetSort($event)">
+                <th>
+                    <input type="checkbox">
+                </th>
+                @for (column of columns; track column.key) {
+                    <th  
+                        class="table-header_item" 
+                        [style.width]="column.size ? `${column.size}px` : '100px'" 
+                        [attr.data-column-key]="column.key">
+                        {{column.title}}
+                        @if (sort.key === column.key) {
+                            <span>{{ sort.direction ? '↑' : '↓' }}</span>
+                          }
+                    </th>
+                }          
+            </tr>
+            @if(filters){
+                <tr [formGroup]="filters">
+                    <th>
+                       
+                    </th>
+                    @for (column of columns; track column.key) {
+                        <th 
+                            [style.width]="column.size ? `${column.size}px` : '100px'">
+                            <input 
+                                [type]="column.type" 
+                                [formControlName]="column.key" 
+                                (change)="onChangeInput()">
+                        </th>
+                    }          
+                </tr>
+            }
+            
+        </thead>
+        <tbody>
+            @for (row of formattedRows; track row) {
+                <tr>
+                    <th>
+                        <input 
+                        type="checkbox" 
+                        [checked]='getCheckedState(row)'
+                        (change)="onCheckboxChange(row)" />
+                    </th>
+                    @for (column of columns; track column.key) {
+                        <th>{{getRowValueGetter(column, row)?.value}}</th>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
