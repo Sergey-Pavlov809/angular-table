@@ -1,12 +1,14 @@
-import { Component, Input } from '@angular/core';
+import { Component, ComponentFactoryResolver, Input, PipeTransform, QueryList, SimpleChanges, ViewChild, ViewChildren, ViewContainerRef } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { getFormattedRows, getRowValue } from './lib/utils';
 import { TColumn, TRow, TSort } from './lib/types';
 import { defaultSort } from './lib/constants';
+import { CeilComponent } from './components/ceil/ceil.component';
+import { CustomPipePipe } from './pipes/custom-pipe.pipe';
 
 @Component({
   selector: 'app-table',
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule, CeilComponent, CustomPipePipe],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss'
 })
@@ -18,13 +20,11 @@ export class TableComponent {
 
   copyRows: TRow[] = []
   isShowFilters: boolean = true;
-
   sort: TSort = defaultSort
-
   formattedRows: TRow[] = []
   filters!: FormGroup;
 
-  constructor() {}
+  constructor(private vcr: ViewContainerRef) {}
 
   initForm = () => {
     const additionalFilters = {
@@ -41,12 +41,61 @@ export class TableComponent {
     this.filters = new FormGroup(filters)
   }
 
+  initCastomCeils = () => {
+
+  }
+
   ngOnInit() {
     this.initForm()
     this.formattedRows = getFormattedRows(this.rows)
     this.copyRows = getFormattedRows(this.rows)
+    this.initCastomCeils()
+  }
+/*
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['columns'] || changes['rows']) {
+      this.renderComponents();
+    }
   }
 
+
+  private async renderComponents() {
+    // Очищаем предыдущие компоненты
+    this.vcr.clear();
+    
+    // Даем Angular время обработать изменения
+    await Promise.resolve();
+
+    this.componentHosts.forEach((container, index) => {
+      console.log(this.componentHosts)
+      const colIndex = 3;
+
+      const rowIndex = Math.floor(index / this.columns.length);
+      const column = this.columns[colIndex];
+      const row = this.rows[rowIndex];
+
+      console.log(column, row)
+
+      if (column.formatterComponent && row) {
+        // Создаем компонент напрямую
+        // const componentRef = container.createComponent(column.formatterComponent);
+        
+        // Устанавливаем входные параметры
+        // componentRef.setInput('value', this.getCellValue(column, row));
+        
+        // Передаем дополнительные параметры
+        if (column.formatterInputs) {
+          Object.entries(column.formatterInputs).forEach(([key, value]) => {
+            componentRef.setInput(key, value);
+          });
+        }
+      }
+    });
+  }*/
+
+  getCellValue(column: TColumn, row: TRow): any {
+    return row.find((r) => r.key === column.key);
+  }
 
   onResetFilters = () => {
     this.filters.reset();
@@ -147,6 +196,4 @@ export class TableComponent {
   onHideFilters = () => {
     this.isShowFilters = !this.isShowFilters
   }
-
-  getRowValueGetter = getRowValue
 }

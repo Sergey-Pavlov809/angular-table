@@ -1,9 +1,17 @@
+import { Type } from "@angular/core";
+
+export type CeilProps = {
+    value: unknown
+}
+
 export type TColumn = {
     key: string;
     title: string;
     size?: number;
     type?: string;
     formatter?: unknown;
+    formatterComponent?: Type<CeilProps>;
+    formatterInputs?: Record<string, unknown>;
 }
 
 export type TRow = {

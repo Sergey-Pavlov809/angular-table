@@ -31,9 +31,9 @@
                     @for (column of columns; track column.key) {
                         <th 
                             [style.width]="column.size ? `${column.size}px` : '100px'">
-                            <input 
+                            <input
                                 [type]="column.type" 
-                                [formControlName]="column.key" 
+                                [formControlName]="column.key | customPipe" 
                                 (change)="onChangeInput()">
                         </th>
                     }          
@@ -45,13 +45,15 @@
             @for (row of formattedRows; track row) {
                 <tr>
                     <th>
-                        <input 
+                        <input
                         type="checkbox" 
                         [checked]='getCheckedState(row)'
                         (change)="onCheckboxChange(row)" />
                     </th>
                     @for (column of columns; track column.key) {
-                        <th>{{getRowValueGetter(column, row)?.value}}</th>
+                        <th>
+                            <app-ceil [row]="row" [column]="column"></app-ceil>
+                        </th>                                    
                     }
                 </tr>
             }

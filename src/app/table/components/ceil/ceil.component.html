@@ -1,0 +1,7 @@
+@if (column && row) {
+    @if (column.formatterComponent) {
+    <th><ng-template #dynamic></ng-template></th>
+    } @else {
+        <th>{{ getRowValueGetter(column, row)?.value }}</th>
+    }
+}

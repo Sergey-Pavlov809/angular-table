@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TableComponent, TColumn, TRow } from './table';
+import { DefaultBoolFormatterComponent } from './table/formatters/default-bool-formatter/default-bool-formatter.component';
 
 const ROWS: TRow[] = [
   [
@@ -57,31 +58,38 @@ const COLUMNS: TColumn[]  = [
   {
     key: 'id',
     title: 'id',
-    type: 'number'
+    type: 'number',
+    size: 80
   },
   {
     key: 'name',
     title: 'name',
-    type: 'string'
+    type: 'string',
+    size: 150
   },
   {
     key: 'date',
     title: 'date',
-    type: 'date'
+    type: 'date',
+    size: 150
   },
   {
     key: 'is_active',
     title: 'is_active',
     type: 'boolean',
-    formatter: null
+    formatter: null,
+    formatterComponent: DefaultBoolFormatterComponent,
+    size: 150
   },
   {
     key: 'metadata',
     title: 'metadata',
+    size: 100
   },
   {
     key: 'stock',
     title: 'stock',
+    size: 100
   },
 ] 
 
