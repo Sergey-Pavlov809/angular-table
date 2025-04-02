@@ -5,10 +5,11 @@ import { TColumn, TRow, TSort } from './lib/types';
 import { defaultSort } from './lib/constants';
 import { CeilComponent } from './components/ceil/ceil.component';
 import { CustomPipePipe } from './pipes/custom-pipe.pipe';
+import { EmptyDirectiveDirective } from './directive/empty-directive.directive';
 
 @Component({
   selector: 'app-table',
-  imports: [FormsModule, ReactiveFormsModule, CeilComponent, CustomPipePipe],
+  imports: [FormsModule, ReactiveFormsModule, CeilComponent, CustomPipePipe, EmptyDirectiveDirective],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss'
 })
@@ -86,9 +87,10 @@ export class TableComponent {
   onChangeInput = () => {
     const sortWorker = new Worker(new URL('./lib/filter.worker', import.meta.url), { type: 'module' })
 
-    sortWorker.postMessage({ rows: this.formattedRows, filters: this.filters.value })
+    sortWorker.postMessage({ rows: this.formattedRows, filters: this.filters.value, copyRows: this.copyRows })
 
     sortWorker.onmessage = ({ data }) => {
+      console.log(data)
       this.formattedRows = data
     };
   }
@@ -140,7 +142,7 @@ export class TableComponent {
       return res
       
     })
-    console.log(newRows)
+
     this.formattedRows = newRows
   }
 

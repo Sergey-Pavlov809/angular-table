@@ -11,9 +11,7 @@ addEventListener('message', (props) => {
         res = rows.sort((a: TRow, b: TRow) => {
             const f1 = a.find((e) => e.key === sortOptions.key)?.value
             const f2 = b.find((e) => e.key === sortOptions.key)?.value
-            console.log(f1, f2)
             if(!Number.isNaN(Number(f1)) && !Number.isNaN(Number(f2))) return Number(f1) - Number(f2)
-              console.log(f1, f2)
             return (String(f1) > String(f2)) ? 1 : -1
         });
     } else {

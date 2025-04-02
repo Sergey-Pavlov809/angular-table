@@ -26,7 +26,6 @@ export class CeilComponent {
 
   ngOnInit() {
     this.initCeil()
-    console.log(this.row, this.column, this.vcr)
   }
 
   getRowValueGetter = getRowValue

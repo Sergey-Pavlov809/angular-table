@@ -9,9 +9,6 @@ export class EmptyDirectiveDirective {
   @HostListener('input', ['$event'])
   onInput(event: Event) {
     const input = event.target as HTMLInputElement;
-
-    console.log(input)
-
-
+    console.log(input, this.el)
   }
 }
