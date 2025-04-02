@@ -51,51 +51,6 @@ export class TableComponent {
     this.copyRows = getFormattedRows(this.rows)
     this.initCastomCeils()
   }
-/*
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['columns'] || changes['rows']) {
-      this.renderComponents();
-    }
-  }
-
-
-  private async renderComponents() {
-    // Очищаем предыдущие компоненты
-    this.vcr.clear();
-    
-    // Даем Angular время обработать изменения
-    await Promise.resolve();
-
-    this.componentHosts.forEach((container, index) => {
-      console.log(this.componentHosts)
-      const colIndex = 3;
-
-      const rowIndex = Math.floor(index / this.columns.length);
-      const column = this.columns[colIndex];
-      const row = this.rows[rowIndex];
-
-      console.log(column, row)
-
-      if (column.formatterComponent && row) {
-        // Создаем компонент напрямую
-        // const componentRef = container.createComponent(column.formatterComponent);
-        
-        // Устанавливаем входные параметры
-        // componentRef.setInput('value', this.getCellValue(column, row));
-        
-        // Передаем дополнительные параметры
-        if (column.formatterInputs) {
-          Object.entries(column.formatterInputs).forEach(([key, value]) => {
-            componentRef.setInput(key, value);
-          });
-        }
-      }
-    });
-  }*/
-
-  getCellValue(column: TColumn, row: TRow): any {
-    return row.find((r) => r.key === column.key);
-  }
 
   onResetFilters = () => {
     this.filters.reset();
