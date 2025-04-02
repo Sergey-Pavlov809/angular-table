@@ -153,4 +153,17 @@ export class TableComponent {
   onHideFilters = () => {
     this.isShowFilters = !this.isShowFilters
   }
+
+  onSelectAll = () => {
+    this.formattedRows = this.formattedRows.map((r) => {
+      return r.map((el) => {
+        if(el.key !== 'checkbox') return el
+        return {
+          key: 'checkbox',
+          value: !el.value
+        }
+      })
+    })
+
+  }
 }

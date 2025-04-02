@@ -9,7 +9,7 @@
         <thead>
             <tr class="table-header" (click)="onSetSort($event)">
                 <th>
-                    <input type="checkbox">
+                    <input type="checkbox" (click)="onSelectAll()">
                 </th>
                 @for (column of columns; track column.key) {
                     <th  
